@@ -1,5 +1,5 @@
-let firstValue = null;
-let operator = null;
+let firstValue = '';
+let operator = '';
 let currentOperation = null // used to enter new value and enter to first value or operator
 let shouldResetScreen = false;
 
@@ -19,10 +19,10 @@ function operate(a, b, operator) {
 
 // clears screen of all operations
 function clear() {
-    currentScreenOperation.textContent = 0;
+    currentScreenOperation.textContent = '0';
     lastScreenOperation.textContent = '';
-    firstValue = null;
-    operator = null;
+    firstValue = '';
+    operator = '';
     currentOperation = null;
 }
 
@@ -35,7 +35,7 @@ function resetCurrent() {
 // 1. sets first entered value to screen then sets 2nd after operator is entered
 // 2. sets current value aka 2nd value to be add to operation but only if current value is not null
 function appendNumber(number) {
-    currentScreenOperation.textContent === '0' || shouldResetScreen ? resetCurrent() : // prepares currentscreenoperation to update with 2nd value 
+    currentScreenOperation.textContent === '0' || shouldResetScreen ? resetCurrent() : undefined;// prepares currentscreenoperation to update with 2nd value 
     currentScreenOperation.textContent += number;  // temporarily saves first value to this 
 }
 
@@ -62,8 +62,8 @@ function calculate() {
 const numberButtons = document.querySelectorAll('[data-number]');
 const operatorButtons = document.querySelectorAll('[data-operators]');
 const equals = document.getElementById('equals');
-const currentScreenOperation = document.querySelector('.currentScreen-operation');
-const lastScreenOperation = document.querySelector('.lastScreen-operation');
+const currentScreenOperation = document.getElementById('currentScreenOperation');
+const lastScreenOperation = document.getElementById('lastScreenOperation');
 const reset = document.getElementById('clear');
 
 reset.addEventListener('click', clear);
