@@ -39,6 +39,16 @@ function appendNumber(number) {
     currentScreenOperation.textContent += number;  // temporarily saves first value to this 
 }
 
+function appendDecimal() {
+    currentScreenOperation.textContent.includes('.') ? undefined : 
+    currentScreenOperation.textContent += '.';
+}
+
+function deleteNumber() {
+    currentScreenOperation.textContent = currentScreenOperation.textContent.toString().slice(0, -1);
+}
+
+
 // evaluates first value and operator
 function setOperation (operator) { // when operator is selected after ^^ first value is stored to above
     currentOperation !== null ? calculate() :  // an if statement is ran to see if the value can be calculated
@@ -50,6 +60,7 @@ function setOperation (operator) { // when operator is selected after ^^ first v
 
 
 function calculate() {
+    operator === '0' && currentOperation === '/' ? undefined : alert('You cannot divide by zero');
     operator = currentScreenOperation.textContent;
     currentScreenOperation.textContent = operate(firstValue, operator, currentOperation);
     lastScreenOperation.textContent = `${firstValue} ${currentOperation} ${operator} =`
@@ -62,12 +73,16 @@ function calculate() {
 const numberButtons = document.querySelectorAll('[data-number]');
 const operatorButtons = document.querySelectorAll('[data-operators]');
 const equals = document.getElementById('equals');
+const addPoint = document.getElementById('decimal');
 const currentScreenOperation = document.getElementById('currentScreenOperation');
 const lastScreenOperation = document.getElementById('lastScreenOperation');
 const reset = document.getElementById('clear');
+const removeNum = document.getElementById('delete');
 
 reset.addEventListener('click', clear);
 equals.addEventListener('click', calculate);
+addPoint.addEventListener('click', appendDecimal);
+removeNum.addEventListener('click', deleteNumber);
 
 numberButtons.forEach((button) => 
     button.addEventListener('click', () => appendNumber(button.textContent)));
